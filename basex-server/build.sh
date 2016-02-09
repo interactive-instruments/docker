@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build --rm=true -t de.ii/basex-server_img .
+docker build --rm=true -t iide/basex-server_img .
