@@ -3,6 +3,9 @@ MAINTAINER Jon Herrmann <herrmann@interactive-instruments.de>
 
 EXPOSE 9090
 
+# Gradle version
+ENV GRADLE_VERSION=2.10
+
 # docker run -e TEAMCITY_SERVER=http://buildserver:48111 -dt -p 9090:9090 de.ii/teamcity-agent
 
 # Install compiler
@@ -10,7 +13,16 @@ RUN add-apt-repository ppa:openjdk-r/ppa && apt-get update \
  && apt-get install -q -y --no-install-recommends \
  openjdk-8-jdk \
  git \
+ maven \
+ npm \
  && rm -rf /var/lib/apt/lists/*
+
+# Install gradle
+RUN wget http://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip
+RUN unzip -oq ./gradle-${GRADLE_VERSION}-all.zip -d /opt/gradle
+RUN ln -sfnv gradle-${GRADLE_VERSION} /opt/gradle/latest
+ENV GRADLE_HOME=/opt/gradle/latest
+ENV PATH=$PATH:$GRADLE_HOME/bin
 
 # Create teamcity user
 RUN groupadd -g 33301 teamcity
@@ -20,8 +32,6 @@ ADD res/setup_agent.sh /home/teamcity/setup_agent.sh
 RUN chmod 555 -R /home/teamcity/setup_agent.sh
 
 RUN mkdir -p /home/teamcity/.gradle/wrapper/dists
-ADD res/init.gradle /home/teamcity/.gradle/init.gradle
-RUN chmod 550 /home/teamcity/.gradle/init.gradle
 RUN chown teamcity -R /home/teamcity/.gradle
 
 RUN chmod 1777 /tmp
