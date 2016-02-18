@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build --rm=true -t de.ii/java7-ubuntu .
+docker build --rm=true -t iide/java7-ubuntu .

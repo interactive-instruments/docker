@@ -1,4 +1,4 @@
-FROM de.ii/base-ubuntu
+FROM iide/base-ubuntu
 MAINTAINER J Herrmann <herrmann@interactive-instruments.de>
 
 # Install JAVA 7 (and Tomcat native library)

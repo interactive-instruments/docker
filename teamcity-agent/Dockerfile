@@ -1,4 +1,4 @@
-FROM de.ii/java8-ubuntu
+FROM iide/java8-ubuntu
 MAINTAINER Jon Herrmann <herrmann@interactive-instruments.de>
 
 EXPOSE 9090

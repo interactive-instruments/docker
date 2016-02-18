@@ -1,4 +1,4 @@
-FROM de.ii/java7-ubuntu
+FROM iide/java7-ubuntu
 MAINTAINER J Herrmann <herrmann@interactive-instruments.de>
 
 EXPOSE 1984

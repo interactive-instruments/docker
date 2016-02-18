@@ -1,4 +1,4 @@
-FROM de.ii/base-ubuntu
+FROM iide/base-ubuntu
 MAINTAINER Jon Herrmann <herrmann@interactive-instruments.de>
 
 # Install JAVA 8
@@ -15,4 +15,3 @@ RUN \
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 CMD ["bash"]
-
