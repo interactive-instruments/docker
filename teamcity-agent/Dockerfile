@@ -28,7 +28,7 @@ ENV PATH=$PATH:$GRADLE_HOME/bin
 RUN groupadd -g 33301 teamcity
 RUN useradd -u 33301 -s /sbin/nologin -g teamcity -m -d /home/teamcity teamcity
 
-ADD res/setup_agent.sh /home/teamcity/setup_agent.sh
+ADD https://raw.githubusercontent.com/interactive-instruments/docker-images/master/teamcity-agent/res/setup_agent.sh /home/teamcity/setup_agent.sh
 RUN chmod 555 -R /home/teamcity/setup_agent.sh
 
 RUN mkdir -p /home/teamcity/.gradle/wrapper/dists

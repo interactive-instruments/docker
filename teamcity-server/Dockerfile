@@ -35,7 +35,7 @@ RUN rm /tmp/teamcity.tar.gz
 RUN mkdir -p ${JDBC_DEST}
 RUN wget --quiet --no-cookies ${JDBC_DOWNLOAD}${JDBC_PACKAGE} -O ${JDBC_DEST}/${JDBC_PACKAGE}
 
-ADD res/init.sh /init.sh
+ADD https://raw.githubusercontent.com/interactive-instruments/docker-images/master/teamcity-server/res/init.sh /init.sh
 RUN chmod 555 /init.sh
 RUN mkdir -p ${TEAMCITY_DATA_PATH}/config/
 
