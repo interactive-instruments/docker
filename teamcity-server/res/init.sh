@@ -15,8 +15,10 @@ echo "Datapath directory ${TEAMCITY_DATA_PATH}"
 
 # Copy JDBC driver
 mkdir -p ${TEAMCITY_DATA_PATH}/lib/jdbc
+chmod 750 -R ${TEAMCITY_DATA_PATH}
 cp ${JDBC_DEST}/${JDBC_PACKAGE} ${TEAMCITY_DATA_PATH}/lib/jdbc
-
+chmod 550 ${JDBC_DEST}/${JDBC_PACKAGE} ${TEAMCITY_DATA_PATH}/lib/jdbc
+chown -R ci:ci ${TEAMCITY_DATA_PATH}
 
 TEAMCITY_SERVER_MEM_OPTS="-Xmx1024m -XX:MaxPermSize=270m"
 export TEAMCITY_SERVER_MEM_OPTS
