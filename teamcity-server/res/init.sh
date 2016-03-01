@@ -24,4 +24,5 @@ TEAMCITY_SERVER_MEM_OPTS="-Xmx1024m -XX:MaxPermSize=270m"
 export TEAMCITY_SERVER_MEM_OPTS
 
 export TEAMCITY_DATA_PATH
+sleep ${TEAMCITY_SERVER_DELAYED_START}
 sudo -u ci sh -c 'export "${1}"; /opt/TeamCity/bin/teamcity-server.sh run' _ "TEAMCITY_DATA_PATH=${TEAMCITY_DATA_PATH}"

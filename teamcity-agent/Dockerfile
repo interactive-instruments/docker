@@ -37,5 +37,6 @@ RUN chown teamcity -R /home/teamcity/.gradle
 RUN chmod 1777 /tmp
 
 WORKDIR /home/teamcity/
-ENV TEAMCITY_SERVER=http://teamcity
+ENV TEAMCITY_SERVER=http://teamcity:8111
+ENV TEAMCITY_AGENT_DELAYED_START=40
 CMD ["/home/teamcity/setup_agent.sh"]

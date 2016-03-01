@@ -35,5 +35,5 @@ if [ ! -d "$AGENT_DIR" ]; then
     echo "systemDir=${AGENT_DIR}/system" >> $AGENT_DIR/conf/buildAgent.properties
     cat ${AGENT_DIR}/conf/buildAgent.properties
 fi
-sleep 2
+sleep ${TEAMCITY_AGENT_DELAYED_START}
 sudo -Hu teamcity sh -c 'export "${1}"; cd $AGENT_DIR/../ && ./agent/bin/agent.sh run' _ "AGENT_DIR=${AGENT_DIR}"

@@ -49,4 +49,5 @@ RUN chown -R ci:ci ${TEAMCITY_DATA_PATH} && chmod 755 -R ${TEAMCITY_DATA_PATH}
 ####################################################
 # USER ci
 WORKDIR /opt/TeamCity/bin/
+ENV TEAMCITY_SERVER_DELAYED_START=10
 CMD ["/init.sh"]
