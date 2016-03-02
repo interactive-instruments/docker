@@ -17,11 +17,11 @@ if [ ! -d "$AGENT_DIR" ]; then
     echo "Setting up Agent for the first time."
     echo "Sleeping ${FIRST_INSTALL_SLEEP_TIME} seconds to ensure server is up."
     sleep ${FIRST_INSTALL_SLEEP_TIME}
-    wget --waitretry=30 --retry-connrefused $TEAMCITY_SERVER_URL/update/buildAgent.zip
-    if [[ ! -f buildAgent.zip ]] ; then
-       echo 'File does not exist, aborting.'
-       exit
-    fi
+    while [ 1 ]; do
+      wget --waitretry=30 --retry-connrefused --read-timeout=30 --timeout=15 -t 20 --continue $TEAMCITY_SERVER_URL/update/buildAgent.zip
+      if [ $? = 0 ]; then break; fi;
+      sleep 10;
+    done;
     mkdir -p $AGENT_DIR
     unzip -q -d $AGENT_DIR buildAgent.zip
     rm buildAgent.zip
