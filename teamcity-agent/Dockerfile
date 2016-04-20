@@ -4,9 +4,9 @@ MAINTAINER Jon Herrmann <herrmann@interactive-instruments.de>
 EXPOSE 9090
 
 # Gradle version
-ENV GRADLE_VERSION=2.10
+ENV GRADLE_VERSION=2.12
 
-# docker run -e TEAMCITY_SERVER=http://buildserver:48111 -dt -p 9090:9090 de.ii/teamcity-agent
+# docker run -e TEAMCITY_SERVER_URL=http://buildserver:48111 -dt -p 9090:9090 de.ii/teamcity-agent
 
 # Install compiler
 RUN add-apt-repository ppa:openjdk-r/ppa && apt-get update \
@@ -37,6 +37,4 @@ RUN chown teamcity -R /home/teamcity/.gradle
 RUN chmod 1777 /tmp
 
 WORKDIR /home/teamcity/
-ENV TEAMCITY_SERVER=http://teamcity:8111
-ENV TEAMCITY_AGENT_DELAYED_START=40
 CMD ["/home/teamcity/setup_agent.sh"]

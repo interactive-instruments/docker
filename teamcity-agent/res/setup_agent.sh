@@ -2,13 +2,14 @@
 
 AGENT_DIR="/home/teamcity/agent"
 
-FIRST_INSTALL_SLEEP_TIME=120
-
-if [ -z "$TEAMCITY_SERVER_URL" ]; then
-    echo "Error: TEAMCITY_SERVER_URL is not set."
-    echo
-    exit
+if [ -n "${TEAMCITY_SERVER_URL}" ]; then
+  export TEAMCITY_SERVER_URL=http://teamcity:8111
 fi
+if [ -n "${TEAMCITY_AGENT_DELAYED_START}" ]; then
+  export TEAMCITY_AGENT_DELAYED_START=40
+fi
+
+FIRST_INSTALL_SLEEP_TIME=120
 
 echo "Agent directory set to ${AGENT_DIR}."
 
