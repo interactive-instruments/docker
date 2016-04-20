@@ -28,7 +28,7 @@ RUN chmod 775 -R /opt/artifactory
 # Volume path
 VOLUME  ["/opt/artifactory/data /opt/artifactory/backup /opt/artifactory/etc/security/artifactory.key"]
 
-ADD res/init.sh /init.sh
+ADD https://raw.githubusercontent.com/interactive-instruments/docker-images/master/artifactory-server/res/init.sh /init.sh
 
 WORKDIR /opt/artifactory
 CMD ["/init.sh"]
