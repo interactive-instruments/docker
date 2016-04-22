@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
 AGENT_DIR="/home/teamcity/agent"
+echo "Agent directory set to ${AGENT_DIR}"
 
-if [ -n "${TEAMCITY_SERVER_URL}" ]; then
+if [ -z "${TEAMCITY_SERVER_URL}" ]; then
   export TEAMCITY_SERVER_URL=http://teamcity:8111
 fi
-if [ -n "${TEAMCITY_AGENT_DELAYED_START}" ]; then
+echo "TEAMCITY_SERVER_URL set to ${TEAMCITY_SERVER_URL}"
+
+if [ -z "${TEAMCITY_AGENT_DELAYED_START}" ]; then
   export TEAMCITY_AGENT_DELAYED_START=40
 fi
 
 FIRST_INSTALL_SLEEP_TIME=120
-
-echo "Agent directory set to ${AGENT_DIR}."
 
 if [ ! -d "$AGENT_DIR" ]; then
     cd ${HOME}
