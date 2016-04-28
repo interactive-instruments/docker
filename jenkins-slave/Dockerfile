@@ -9,7 +9,7 @@ RUN mkdir -p /var/jenkins_home \
  && curl -o /bin/swarm-client.jar -SL http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.0/swarm-client-2.0-jar-with-dependencies.jar \
  && echo "$MD5_SUM  /bin/swarm-client.jar" | md5sum -c -
  
-COPY res/docker-entrypoint.sh /
+COPY https://raw.githubusercontent.com/interactive-instruments/docker-images/master/jenkins-slave/res/entrypoint.sh /docker-entrypoint.sh
 WORKDIR /var/jenkins_home/worker
 
 USER jenkins
