@@ -10,6 +10,7 @@ RUN mkdir -p /var/jenkins_home \
  && echo "$MD5_SUM  /bin/swarm-client.jar" | md5sum -c -
 
 ADD https://raw.githubusercontent.com/interactive-instruments/docker-images/master/jenkins-slave/res/entrypoint.sh /docker-entrypoint.sh
+RUN chmod 555 /docker-entrypoint.sh
 WORKDIR /var/jenkins_home/worker
 
 USER jenkins
