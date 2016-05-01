@@ -6,10 +6,10 @@ ENV MD5_SUM 15c1f0937b9b8dd3ceca8f2418801b54
 
 RUN mkdir -p /var/jenkins_home \
  && useradd -d /var/jenkins_home/worker -u 1000 -m -s /bin/bash jenkins \
- && curl -o /bin/swarm-client.jar -SL http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.0/swarm-client-2.0-jar-with-dependencies.jar \
+ && wget --quiet --no-cookies http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.0/swarm-client-2.0-jar-with-dependencies.jar -O /bin/swarm-client.jar \
  && echo "$MD5_SUM  /bin/swarm-client.jar" | md5sum -c -
- 
-COPY https://raw.githubusercontent.com/interactive-instruments/docker-images/master/jenkins-slave/res/entrypoint.sh /docker-entrypoint.sh
+
+ COPY https://raw.githubusercontent.com/interactive-instruments/docker-images/master/jenkins-slave/res/entrypoint.sh /docker-entrypoint.sh
 WORKDIR /var/jenkins_home/worker
 
 USER jenkins
