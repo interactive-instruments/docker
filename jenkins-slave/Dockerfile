@@ -9,7 +9,7 @@ RUN mkdir -p /var/jenkins_home \
  && wget --quiet --no-cookies http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.0/swarm-client-2.0-jar-with-dependencies.jar -O /bin/swarm-client.jar \
  && echo "$MD5_SUM  /bin/swarm-client.jar" | md5sum -c -
 
- COPY https://raw.githubusercontent.com/interactive-instruments/docker-images/master/jenkins-slave/res/entrypoint.sh /docker-entrypoint.sh
+ADD https://raw.githubusercontent.com/interactive-instruments/docker-images/master/jenkins-slave/res/entrypoint.sh /docker-entrypoint.sh
 WORKDIR /var/jenkins_home/worker
 
 USER jenkins
