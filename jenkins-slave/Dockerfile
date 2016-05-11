@@ -5,6 +5,7 @@ MAINTAINER Jon Herrmann <herrmann@interactive-instruments.de>
 ENV SWARM_MD5_SUM=15c1f0937b9b8dd3ceca8f2418801b54
 
 RUN mkdir -p /var/jenkins_home \
+ && add-apt-repository ppa:git-core/ppa
  && apt-get update \
  && apt-get install -y --no-install-recommends \
   git \
