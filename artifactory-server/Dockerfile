@@ -8,7 +8,7 @@ RUN groupadd artifactory
 RUN useradd -s /sbin/nologin -g artifactory -d /opt/artifactory artifactory
 ENV ARTIFACTORY_HOME /opt/artifactory
 
-ENV ARTIFACTORY_VERSION 4.7.4
+ENV ARTIFACTORY_VERSION 4.11.0
 RUN wget --quiet --no-cookies http://dl.bintray.com/content/jfrog/artifactory/jfrog-artifactory-oss-${ARTIFACTORY_VERSION}.zip -O /tmp/artifactory.zip
 
 RUN unzip /tmp/artifactory.zip -d /opt/
