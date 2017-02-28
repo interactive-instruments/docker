@@ -12,11 +12,6 @@ git \
 curl \
 apt-transport-https \
 ca-certificates \
-&& curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add - \
-&& update-ca-certificates -f \
-&& echo "deb https://apt.dockerproject.org/repo/ ubuntu-trusty main" > /etc/apt/sources.list.d/docker.list \
-&& sudo apt-get update \
-&& apt-get install -y --no-install-recommends docker-engine \
 && rm -rf /var/lib/apt/lists/* \
 && useradd -d /var/jenkins_home/worker -u 1000 -m -s /bin/bash jenkins \
 && wget --quiet --no-cookies http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.0/swarm-client-2.0-jar-with-dependencies.jar -O /bin/swarm-client.jar \
