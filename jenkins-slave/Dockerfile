@@ -11,6 +11,7 @@ RUN mkdir -p /var/jenkins_home \
   curl \
   apt-transport-https \
   ca-certificates \
+  maven \
  && apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D \
  && echo “deb https://apt.dockerproject.org/repo ubuntu-trusty main” > /etc/apt/sources.list.d/docker.list \
  && sudo apt-get update \
