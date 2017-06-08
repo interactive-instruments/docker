@@ -13,6 +13,7 @@ curl \
 apt-transport-https \
 ca-certificates \
 maven \
+openssh-client \
 && rm -rf /var/lib/apt/lists/* \
 && useradd -d /var/jenkins_home/worker -u 1000 -m -s /bin/bash jenkins \
 && wget --quiet --no-cookies http://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.0/swarm-client-2.0-jar-with-dependencies.jar -O /bin/swarm-client.jar \
