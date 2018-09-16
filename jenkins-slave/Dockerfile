@@ -3,7 +3,8 @@ MAINTAINER Jon Herrmann <herrmann@interactive-instruments.de>
 # ORIGINAL SOURCE https://github.com/eea/eea.docker.jenkins.slave
 
 ENV SWARM_MD5_SUM=823afa2f38ebc77bed4665676f88b08d \
-SWARM_VERSION=3.14
+SWARM_VERSION=3.14 \
+JAVA_OPTS="-Xmx2048m"
 
 RUN mkdir -p /var/jenkins_home/worker \
 && add-apt-repository ppa:git-core/ppa \
