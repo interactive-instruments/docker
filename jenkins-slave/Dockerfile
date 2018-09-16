@@ -2,7 +2,7 @@ FROM iide/java8-ubuntu
 MAINTAINER Jon Herrmann <herrmann@interactive-instruments.de>
 # ORIGINAL SOURCE https://github.com/eea/eea.docker.jenkins.slave
 
-ENV SWARM_MD5_SUM=823afa2f38ebc77bed4665676f88b08d \
+ENV SWARM_MD5_SUM=0606d6e38ec8b2cc9b9d6e7b064c79ff \
 SWARM_VERSION=3.14 \
 JAVA_OPTS="-Xmx2048m"
 
@@ -22,9 +22,8 @@ openssh-client \
 && echo "$SWARM_MD5_SUM  /bin/swarm-client.jar" | md5sum -c -
 
 ADD https://raw.githubusercontent.com/interactive-instruments/docker-images/master/jenkins-slave/res/entrypoint.sh /docker-entrypoint.sh
+RUN chmod 555 /docker-entrypoint.sh
 WORKDIR /var/jenkins_home/worker
-RUN chmod 555 /docker-entrypoint.sh && \
-chown -v jenkins:jenkins /var/jenkins_home/worker/
 
 USER jenkins
 ENTRYPOINT ["/docker-entrypoint.sh"]
