@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-# ORIGINAL SOURCE https://github.com/eea/eea.docker.jenkins.slave
+
+# The Initial Owner of the Original Code is European Environment Agency (EEA).
+# All Rights Reserved. See
+# https://github.com/eea/eea.docker.jenkins.slave#copyright-and-license
+# Original file:
+# https://github.com/eea/eea.docker.jenkins.slave/blob/master/docker-entrypoint.sh
 
 PARAMS=""
 
@@ -13,10 +18,15 @@ if [ ! -z "$JENKINS_PASS" ]; then
   PARAMS="$PARAMS -password $JENKINS_PASS"
 fi
 
+# The Jenkins user password environment variable;
+if [ ! -z "$JENKINS_PASS_ENV" ]; then
+  PARAMS="$PARAMS -passwordEnvVariable JENKINS_PASS_ENV"
+fi
+
 # Name of the slave
 if [ ! -z "$JENKINS_NAME" ]; then
   IP=`python -c "import socket; print(socket.gethostbyname(socket.gethostname()))"`
-  PARAMS="$PARAMS -name $JENKINS_NAME@$IP"
+  PARAMS="$PARAMS -name $JENKINS_NAME-$IP"
 fi
 
 # Description to be put on the slave
@@ -27,12 +37,6 @@ fi
 # Number of executors. Default is equal with the number of available CPUs
 if [ ! -z "$JENKINS_EXECUTORS" ]; then
   PARAMS="$PARAMS -executors $JENKINS_EXECUTORS"
-fi
-
-# Whitespace-separated list of labels to be assigned
-# for this slave. Multiple options are allowed.
-if [ ! -z "$JENKINS_LABELS" ]; then
-  PARAMS="$PARAMS -labels $JENKINS_LABELS"
 fi
 
 # Number of retries before giving up. Unlimited if not specified.
@@ -86,17 +90,28 @@ if [ ! -z "$JENKINS_DISABLE_SSL_VERIFICATION" ]; then
   PARAMS="$PARAMS -disableSslVerification"
 fi
 
+# Disables SSL verification in the HttpClient.
+if [ ! -z "$JENKINS_SSL_FINGERPRINTS" ]; then
+  PARAMS="$PARAMS -sslFingerprints $JENKINS_SSL_FINGERPRINTS"
+else
+  PARAMS="$PARAMS -sslFingerprints ''"
+fi
+
 # Jenkins options
 if [ ! -z "$JENKINS_OPTS" ]; then
   PARAMS="$PARAMS $JENKINS_OPTS"
 fi
 
+
+echo "Fixing permissions"
+chown -v jenkins:jenkins /var/jenkins_home/worker/
+
 if [ "$1" = "java" ]; then
-  exec java $JAVA_OPTS -jar /bin/swarm-client.jar -fsroot /var/jenkins_home/worker/ $PARAMS
+  exec java $JAVA_OPTS -jar /bin/swarm-client.jar -fsroot /var/jenkins_home/worker/ -labels "$JENKINS_LABELS" $PARAMS
 fi
 
 if [[ "$1" == "-"* ]]; then
-  exec java $JAVA_OPTS -jar /bin/swarm-client.jar -fsroot /var/jenkins_home/worker/ $PARAMS "$@"
+  exec java $JAVA_OPTS -jar /bin/swarm-client.jar -fsroot /var/jenkins_home/worker/ -labels "$JENKINS_LABELS" $PARAMS "$@"
 fi
 
 exec "$@"
