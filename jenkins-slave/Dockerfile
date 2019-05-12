@@ -2,8 +2,8 @@ FROM iide/java8-ubuntu
 MAINTAINER Jon Herrmann <herrmann@interactive-instruments.de>
 # ORIGINAL SOURCE https://github.com/eea/eea.docker.jenkins.slave
 
-ENV SWARM_MD5_SUM=0606d6e38ec8b2cc9b9d6e7b064c79ff \
-SWARM_VERSION=3.14 \
+ENV SWARM_MD5_SUM=c6d699701676b85d691ad2e17150059d \
+SWARM_VERSION=3.15 \
 JAVA_OPTS="-Xmx2048m"
 
 RUN mkdir -p /var/jenkins_home/worker \
