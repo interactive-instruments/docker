@@ -7,10 +7,8 @@ SWARM_VERSION=3.15 \
 JAVA_OPTS="-Xmx2048m"
 
 RUN mkdir -p /var/jenkins_home/worker \
-&& add-apt-repository ppa:git-core/ppa \
 && apt-get update \
 && apt-get install -y --no-install-recommends \
-git \
 curl \
 apt-transport-https \
 ca-certificates \
